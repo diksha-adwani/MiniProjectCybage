@@ -1,0 +1,28 @@
+@CHARSET "ISO-8859-1";
+#menu, #menu ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+#menu .home {
+	float:left;
+	position:relative;
+	line-height: 3em;
+	width: 10em;
+}
+
+#menu .log
+{
+	float:right;
+	line-height: 3em;
+	
+}
+#menu .copyright
+{
+	float:right;
+	position: absolute;
+    top: 640px;
+    right: 0;
+    font-size:15px;
+	
+}

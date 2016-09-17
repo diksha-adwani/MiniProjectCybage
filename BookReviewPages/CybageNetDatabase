@@ -1,0 +1,143 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.6.26-log
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema cybagenet_db
+--
+
+CREATE DATABASE IF NOT EXISTS cybagenet_db;
+USE cybagenet_db;
+
+--
+-- Definition of table `book_reviews`
+--
+
+DROP TABLE IF EXISTS `book_reviews`;
+CREATE TABLE `book_reviews` (
+  `ISBN` int(10) unsigned NOT NULL,
+  `EmpID` int(10) unsigned NOT NULL,
+  `Review` varchar(45) NOT NULL,
+  PRIMARY KEY (`ISBN`,`EmpID`) USING BTREE,
+  KEY `FK_book_reviews_2` (`EmpID`),
+  CONSTRAINT `FK_book_reviews_1` FOREIGN KEY (`ISBN`) REFERENCES `books` (`ISBN`),
+  CONSTRAINT `FK_book_reviews_2` FOREIGN KEY (`EmpID`) REFERENCES `employees` (`EmpID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `book_reviews`
+--
+
+/*!40000 ALTER TABLE `book_reviews` DISABLE KEYS */;
+INSERT INTO `book_reviews` (`ISBN`,`EmpID`,`Review`) VALUES 
+ (111,16703,'fgfgg'),
+ (111112,16702,'Good for beginners'),
+ (111112,16703,'asdfsdlfjk'),
+ (1234565,16703,'nice');
+/*!40000 ALTER TABLE `book_reviews` ENABLE KEYS */;
+
+
+--
+-- Definition of table `books`
+--
+
+DROP TABLE IF EXISTS `books`;
+CREATE TABLE `books` (
+  `ISBN` int(10) unsigned NOT NULL,
+  `BookName` varchar(45) NOT NULL,
+  `Category` varchar(45) NOT NULL,
+  `Author` varchar(45) NOT NULL,
+  `Publication` varchar(45) NOT NULL,
+  `Description` varchar(45) NOT NULL,
+  PRIMARY KEY (`ISBN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `books`
+--
+
+/*!40000 ALTER TABLE `books` DISABLE KEYS */;
+INSERT INTO `books` (`ISBN`,`BookName`,`Category`,`Author`,`Publication`,`Description`) VALUES 
+ (111,'GGGG','Historical','Hhjsgdjgszd','mhfjsfgksdgzf',',xmcvjhxhcjvkd'),
+ (123,'Gandhi','Historical','Mahesh','ABC','Nice Book'),
+ (225,'jb','Historical','kjhjkh','mjmhkj','kjjhjkh'),
+ (556,'Sambha','Fictions','Chintu','ASD','madfhdsmfcdcc'),
+ (666,'CPP','Technical','dmfh','kjd','xcm,zbvxc,jvxcv'),
+ (754,'jgh','Fictions','jhfj','jgjkh','jhjjghk'),
+ (789,'Java','Technical','Vinod','Raja','Nice Book'),
+ (3323,'Let Us C','Technical','jkjh','jkgjkgjg','jgjhgjgjgjgj'),
+ (1234565,'gdfh','Novel','hfgh','ghghghghghghdf',''),
+ (5632145,'hgjhg','Fictions','hkjhkh','kjhkjhkj','kjhkkh');
+/*!40000 ALTER TABLE `books` ENABLE KEYS */;
+
+
+--
+-- Definition of table `employees`
+--
+
+DROP TABLE IF EXISTS `employees`;
+CREATE TABLE `employees` (
+  `EmpID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `UserName` varchar(45) NOT NULL,
+  `FirstName` varchar(45) NOT NULL,
+  `LastName` varchar(45) NOT NULL,
+  `Email` varchar(45) NOT NULL,
+  `Pass` varchar(45) NOT NULL,
+  PRIMARY KEY (`EmpID`)
+) ENGINE=InnoDB AUTO_INCREMENT=16704 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `employees`
+--
+
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+INSERT INTO `employees` (`EmpID`,`UserName`,`FirstName`,`LastName`,`Email`,`Pass`) VALUES 
+ (16702,'muniramc','Muniram','Chaurasiya','mnrm@cybage.com','1c3d2890afa1c74ef3d968f8e0c1874beaa9e7f6'),
+ (16703,'abhi','Abhijeet','Patil','ab@cybage.com','583d34e8d23dd4bba09ae02924ab082b493e02ad');
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user_role`
+--
+
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE `user_role` (
+  `EmpID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Role` varchar(45) NOT NULL,
+  PRIMARY KEY (`EmpID`),
+  CONSTRAINT `FK_user_role_1` FOREIGN KEY (`EmpID`) REFERENCES `employees` (`EmpID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16704 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user_role`
+--
+
+/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+INSERT INTO `user_role` (`EmpID`,`Role`) VALUES 
+ (16702,'Admin'),
+ (16703,'User');
+/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
